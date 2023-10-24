@@ -1,0 +1,15 @@
+[project]
+name = "tri-seasonal-s1-sar-composites"
+description = "A small python module to generate STAC records from a tri seasonal s1 SAR composites DPS run."
+dependencies = [
+    "rio-stac==0.8.1",
+    "pystac==1.8.4"
+]
+dynamic = ["version"]
+
+[build-system]
+requires = ["flit>=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.module]
+name = "tri_seasonal_s1_sar_composites"
