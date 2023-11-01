@@ -5,6 +5,7 @@ from tri_seasonal_s1_sar_composites import constants as c
 from tri_seasonal_s1_sar_composites import utils
 
 def create_collection(catalog_url: str) -> pystac.Collection :
+    """ create collection """
     spatial_extent = pystac.collection.SpatialExtent([[-180, -90, 180, 90]])
     temporal_extent = pystac.collection.TemporalExtent(intervals=[[datetime.datetime(2018,1,1), datetime.datetime(2018, 12, 31)]])
     
