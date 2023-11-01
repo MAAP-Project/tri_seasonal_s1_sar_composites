@@ -4,7 +4,7 @@ import pystac
 from tri_seasonal_s1_sar_composites import constants as c
 from tri_seasonal_s1_sar_composites import utils
 
-def create_collection() -> pystac.Collection :
+def create_collection(catalog_url: str) -> pystac.Collection :
     spatial_extent = pystac.collection.SpatialExtent([[-180, -90, 180, 90]])
     temporal_extent = pystac.collection.TemporalExtent(intervals=[[datetime.datetime(2018,1,1), datetime.datetime(2018, 12, 31)]])
     
@@ -18,7 +18,7 @@ def create_collection() -> pystac.Collection :
         extent=pystac.collection.Extent(spatial_extent, temporal_extent),
         title=c.COLLECTION_TITLE,
         stac_extensions=['https://stac-extensions.github.io/item-assets/v1.0.0/schema.json'],
-        href=c.COLLECTION_LINK,
+        href=c.COLLECTION_LINK_PATTERN.format(root=catalog_url, collection=c.COLLECTION_ID),
         license=c.COLLECTION_LICENSE,
         extra_fields={'item_assets':item_assets}
     )
@@ -29,13 +29,13 @@ def create_collection() -> pystac.Collection :
     # commenting this out because it seems to be added automatically by our ingestor 
     # ext.collection.add_link(pystac.Link(pystac.RelType.ITEMS, COLLECTION_ITEMS_LINK, media_type=pystac.MediaType.GEOJSON))
 
-    ext.collection.add_link(pystac.Link(pystac.RelType.PARENT, c.ROOT_LINK, media_type=pystac.MediaType.JSON))
+    ext.collection.add_link(pystac.Link(pystac.RelType.PARENT, catalog_url, media_type=pystac.MediaType.JSON))
 
     
     return ext.collection
 
 
-def create_item(file_path: str) -> pystac.Item:
+def create_item(file_path: str, catalog_url: str) -> pystac.Item:
     """
     create a STAC item for the tile, subtile and season corresponding to `file_path`
     the STAC item spatial extent corresponds to the tile, subtile associated with `file_path`, and the
@@ -68,8 +68,8 @@ def create_item(file_path: str) -> pystac.Item:
     item = items['VV'] # any of the two, then add the asset for the other
     
     item.add_asset('VH',items['VH'].assets['VH'])
-    item.add_link(pystac.Link(pystac.RelType.ROOT, c.ROOT_LINK, media_type=pystac.MediaType.JSON))
-    item.add_link(pystac.Link(pystac.RelType.PARENT, c.COLLECTION_LINK, media_type=pystac.MediaType.JSON))
-    item.add_link(pystac.Link(pystac.RelType.SELF, f"{c.COLLECTION_ITEMS_LINK}/{item.id}", media_type=pystac.MediaType.GEOJSON))
+    item.add_link(pystac.Link(pystac.RelType.ROOT, catalog_url, media_type=pystac.MediaType.JSON))
+    item.add_link(pystac.Link(pystac.RelType.PARENT, c.COLLECTION_LINK_PATTERN.format(root=catalog_url, collection=c.COLLECTION_ID), media_type=pystac.MediaType.JSON))
+    item.add_link(pystac.Link(pystac.RelType.SELF, f"{c.COLLECTION_ITEMS_LINK_PATTERN.format(collection_link=c.COLLECTION_LINK_PATTERN.format(root=catalog_url, collection=c.COLLECTION_ID))}/{item.id}", media_type=pystac.MediaType.GEOJSON))
     
     return item

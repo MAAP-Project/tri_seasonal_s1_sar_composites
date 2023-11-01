@@ -8,22 +8,22 @@ DATE_RANGES = {
 
 }
 
-
+    
+COLLECTION_LINK_PATTERN = "{root}/collections/{collection}"
+COLLECTION_ITEMS_LINK_PATTERN = '{collection_link}/items'
+ITEM_SELF_LINK_PATTERN = "{items_link}/"
 
 ID_PATTERN="{parent_folder}_{season}"
 
 
-ROOT_LINK = "https://stac.maap-project.org"
+
 COLLECTION_ID='tri_seasonal_s1_sar_composites'
 COLLECTION_TITLE='Tri seasonal S1 SAR composites'
 COLLECTION_DESCRIPTION='tri-seasonal composite built yearly from dual-polarimetric data. For each of the 3 seasons we consider, we use bands VV and VH, for a total of 6 bands for each year.'
-COLLECTION_LINK = f"{ROOT_LINK}/collections/{COLLECTION_ID}"
-COLLECTION_ITEMS_LINK = f'{COLLECTION_LINK}/items'
+
 COLLECTION_LICENSE = 'not-provided'
-
-
-ITEM_SELF_LINK = f"{COLLECTION_ITEMS_LINK}/"
 
 BANDS = ['VV','VH']
 
 SEASONS = ['frozen','summer','shoulder']
+
