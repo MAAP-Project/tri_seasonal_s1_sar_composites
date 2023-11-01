@@ -51,7 +51,7 @@ def create_item(file_path: str, catalog_url: str) -> pystac.Item:
         with_raster=True,
         with_proj=True,
         asset_roles=['data'],
-        collection=c.COLLECTION_LINK_PATTERN.format(root=catalog_url, collection=c.COLLECTION_ID),
+        collection=c.COLLECTION_ID,
         asset_media_type="image/tiff; application=geotiff; profile=cloud-optimized",
         properties={'start_datetime':c.DATE_RANGES[season][0], 'end_datetime':c.DATE_RANGES[season][1]},
         id=c.ID_PATTERN.format(parent_folder=parent_folder, season=season)
