@@ -1,4 +1,4 @@
-EXAMPLE_PATH = 's3://maap-ops-workspace/montesano/dps_output/do_gee_download_by_subtile/EXPORT_GEE_v2/SAR_S1_2018/2023/10/13/22/06/55/952988/s1_vv_vh_gamma_2018_pwr_tile103-subtile000127/s1_vv_vh_gamma_2018_pwr_tile103.VH_median_summer-subtile000127.tif'
+EXAMPLE_PATH = 's3://maap-ops-workspace/shared/montesano/dps_output/do_gee_download_by_subtile/EXPORT_GEE_v2/SAR_S1_2018/2023/10/13/22/06/55/952988/s1_vv_vh_gamma_2018_pwr_tile103-subtile000127/s1_vv_vh_gamma_2018_pwr_tile103.VH_median_summer-subtile000127.tif'
 PATTERN = 's1_vv_vh_gamma_2018_pwr_tile{tile}.{band}_median_{season}-subtile{subtile}.tif'
 PATTERN_REGEX = r"s1_vv_vh_gamma_2018_pwr_tile(?P<tile>\d+)\.(?P<band>V[HV])_median_(?P<season>\w+)-subtile(?P<subtile>\d+)\.tif"
 DATE_RANGES = {

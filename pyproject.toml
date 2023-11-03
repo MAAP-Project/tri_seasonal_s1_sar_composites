@@ -3,7 +3,8 @@ name = "tri-seasonal-s1-sar-composites"
 description = "A small python module to generate STAC records from a tri seasonal s1 SAR composites DPS run."
 dependencies = [
     "rio-stac==0.8.1",
-    "pystac==1.8.4"
+    "pystac==1.8.4",
+    "fire==0.5.0"
 ]
 dynamic = ["version"]
 
